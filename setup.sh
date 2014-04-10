@@ -15,6 +15,9 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
+echo "Updating system package database..."
+sudo apt-get -qq update > /dev/null
+
 echo "install sudo..."
 apt-get install -y -qq sudo git-core
 
@@ -38,16 +41,3 @@ fi
 
 echo "installing zk-base...(it may take quite a few minutes)"
 su - $USERNAME -c "/home/$USERNAME/zk-base/install.sh"
-if [ $? -eq 0 ]; then
-  echo "Succeed to install ZK-BASE on this device."
-  echo "Rebooting now to next stage: ZK-BOOTLOADER"
-  sleep 3
-  service zk_setup uninstall
-  exit 0
-else
-  echo "Fail to install ZK-BASE. Try run 'service zk_setup start' again."
-  exit 1
-fi
-
-
-
