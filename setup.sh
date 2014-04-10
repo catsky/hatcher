@@ -16,7 +16,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 echo "Updating system package database..."
-sudo apt-get -qq update > /dev/null
+apt-get -qq update > /dev/null
 
 echo "install sudo..."
 apt-get install -y -qq sudo git-core
